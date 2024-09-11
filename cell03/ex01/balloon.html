@@ -30,7 +30,7 @@
 
   <script>
     const balloon = document.getElementById('balloon');
-    let size = 200; // Initial size
+    let size = 200; 
     const maxSize = 420; 
     const minSize = 200; 
     let colors = ['red', 'green', 'blue']; 
@@ -44,7 +44,7 @@
     }
 
     balloon.addEventListener('click', () => {
-      // Increase size by 10px on each click
+      
       size += 10;
 
       
@@ -52,8 +52,8 @@
 
     
       if (size > maxSize) {
-        size = minSize; // Reset size
-        colorIndex = 0; // Reset color to red
+        size = minSize; 
+        colorIndex = 0;
       }
 
       updateBalloon();
