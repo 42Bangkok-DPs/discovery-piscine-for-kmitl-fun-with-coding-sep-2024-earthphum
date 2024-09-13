@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Basic Calculator</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
   <input type="number" id="leftOperand">
@@ -15,54 +16,71 @@
     <option value="%">%</option>
   </select>
   <input type="number" id="rightOperand">
-  <button onclick="calculate()">Try me!</button>
+  <button id="calculateBtn">Try me!</button>
+
   <script>
-    function calculate() {
-      const leftOperand = parseInt(document.getElementById("leftOperand").value);
-      const rightOperand = parseInt(document.getElementById("rightOperand").value);
-      const operator = document.getElementById("operator").value;
+    $(document).ready(function() {
+      function isNumber(value) {
+        return typeof value === 'number';
+      }
+      // ฟังก์ชันการคำนวณ
+      function calculate() {
+        const leftOperand = parseInt($('#leftOperand').val());
+        const rightOperand = parseInt($('#rightOperand').val());
+        const operator = $('#operator').val();
 
-      if (leftOperand < 0 || rightOperand < 0) {
-        alert("Error :(");
-        return;
+        if (leftOperand < 0 || rightOperand < 0) {
+          alert("Error :(");
+          console.log("Error :(");
+          return;
+        }else if (isNumber(leftOperand) || isNumber(rightOperand)) {
+          alert("Error :(");
+          console.log("Error :(");
+          return;
+        }
+
+        let result;
+        switch (operator) {
+          case "+":
+            result = leftOperand + rightOperand;
+            alert(`Result: ${result}`);
+            console.log(`Result: ${result}`);
+            break;
+          case "-":
+            result = leftOperand - rightOperand;
+            alert(`Result: ${result}`);
+            console.log(`Result: ${result}`);
+            break;
+          case "*":
+            result = leftOperand * rightOperand;
+            alert(`Result: ${result}`);
+            console.log(`Result: ${result}`);
+            break;
+          case "/":
+            if (rightOperand === 0) {
+              alert("It's over 9000!");
+              console.log("It's over 9000!");
+            } 
+            break;
+          case "%":
+            if (rightOperand === 0) {
+              alert("It's over 9000!");
+              console.log("It's over 9000!");          
+            } 
+            break;
+        }
+
+      
       }
 
-      let result;
-      switch (operator) {
-        case "+":
-          result = leftOperand + rightOperand;
-          break;
-        case "-":
-          result = leftOperand - rightOperand;
-          break;
-        case "*":
-          result = leftOperand * rightOperand;
-          break;
-        case "/":
-          if (rightOperand === 0) {
-            alert("It's over 9000!");
-            result = "Infinity";
-          } else {
-            result = leftOperand / rightOperand;
-          }
-          break;
-        case "%":
-          if (rightOperand === 0) {
-            alert("It's over 9000!");
-            result = "NaN";
-          } else {
-            result = leftOperand % rightOperand;
-          }
-          break;
-      }
+      // ตั้งค่าเหตุการณ์คลิกปุ่มคำนวณ
+      $('#calculateBtn').on('click', calculate);
 
-      alert(`Result: ${result}`);
-      console.log(`Result: ${result}`);
-    }
-
-    setInterval(() => {
-      alert("Please, use me...");
-    }, 30000);
+      // แสดงการแจ้งเตือนทุกๆ 30 วินาที
+      setInterval(() => {
+        alert("Please, use me...");
+      }, 30000);
+    });
   </script>
 </body>
 </html>
