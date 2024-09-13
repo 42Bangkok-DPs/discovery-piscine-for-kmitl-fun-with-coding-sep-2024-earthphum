@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <input type="number" id="leftOperand">
+  <select id="operator">
+    <option value="+">+</option>
+    <option value="-">-</option>
+    <option value="*">*</option>
+    <option value="/">/</option>
+    <option value="%">%</option>
+  </select>
+  <input type="number" id="rightOperand">
+  <button id="calculateBtn">Try me!</button>
+
+  <script>
+    $(document).ready(function() {
+      // ฟังก์ชันการคำนวณ
+      function calculate() {
+        const leftOperand = parseInt($('#leftOperand').val());
+        const rightOperand = parseInt($('#rightOperand').val());
+        const operator = $('#operator').val();
+
+        if (leftOperand < 0 || rightOperand < 0) {
+          alert("Error :(");
+          return;
+        }
+
+        let result;
+        switch (operator) {
+          case "+":
+            result = leftOperand + rightOperand;
+            break;
+          case "-":
+            result = leftOperand - rightOperand;
+            break;
+          case "*":
+            result = leftOperand * rightOperand;
+            break;
+          case "/":
+            if (rightOperand === 0) {
+              alert("It's over 9000!");
+              result = "Infinity";
+            } else {
+              result = leftOperand / rightOperand;
+            }
+            break;
+          case "%":
+            if (rightOperand === 0) {
+              alert("It's over 9000!");
+              result = "NaN";
+            } else {
+              result = leftOperand % rightOperand;
+            }
+            break;
+        }
+
+        alert(`Result: ${result}`);
+        console.log(`Result: ${result}`);
+      }
+
+      // ตั้งค่าเหตุการณ์คลิกปุ่มคำนวณ
+      $('#calculateBtn').on('click', calculate);
+
+      // แสดงการแจ้งเตือนทุกๆ 30 วินาที
+      setInterval(() => {
+        alert("Please, use me...");
+      }, 30000);
+    });
+  </script>
+</body>
+</html>
