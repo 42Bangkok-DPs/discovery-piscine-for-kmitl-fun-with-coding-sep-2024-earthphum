@@ -20,6 +20,9 @@
 
   <script>
     $(document).ready(function() {
+      function isNumber(value) {
+        return typeof value === 'number';
+      }
       // ฟังก์ชันการคำนวณ
       function calculate() {
         const leftOperand = parseInt($('#leftOperand').val());
@@ -28,6 +31,11 @@
 
         if (leftOperand < 0 || rightOperand < 0) {
           alert("Error :(");
+          console.log("Error :(");
+          return;
+        }else if (isNumber(leftOperand) || isNumber(rightOperand)) {
+          alert("Error :(");
+          console.log("Error :(");
           return;
         }
 
@@ -35,33 +43,34 @@
         switch (operator) {
           case "+":
             result = leftOperand + rightOperand;
+            alert(`Result: ${result}`);
+            console.log(`Result: ${result}`);
             break;
           case "-":
             result = leftOperand - rightOperand;
+            alert(`Result: ${result}`);
+            console.log(`Result: ${result}`);
             break;
           case "*":
             result = leftOperand * rightOperand;
+            alert(`Result: ${result}`);
+            console.log(`Result: ${result}`);
             break;
           case "/":
             if (rightOperand === 0) {
               alert("It's over 9000!");
-              result = "Infinity";
-            } else {
-              result = leftOperand / rightOperand;
-            }
+              console.log("It's over 9000!");
+            } 
             break;
           case "%":
             if (rightOperand === 0) {
               alert("It's over 9000!");
-              result = "NaN";
-            } else {
-              result = leftOperand % rightOperand;
-            }
+              console.log("It's over 9000!");          
+            } 
             break;
         }
 
-        alert(`Result: ${result}`);
-        console.log(`Result: ${result}`);
+      
       }
 
       // ตั้งค่าเหตุการณ์คลิกปุ่มคำนวณ
